@@ -16,8 +16,11 @@ const navLinks = [
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
 
   useEffect(() => {
+    setIsMounted(true);
+    
     const handleScroll = () => {
       const isScrolled = window.scrollY > 20;
       if (isScrolled !== scrolled) {
@@ -25,10 +28,66 @@ export default function Navbar() {
       }
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    // Only add the event listener on the client
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', handleScroll);
+      // Call it once to initialize
+      handleScroll();
+    }
+    
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('scroll', handleScroll);
+      }
+    };
   }, [scrolled]);
 
+  // Server-side or initial render (not yet mounted)
+  if (!isMounted) {
+    return (
+      <header className="fixed top-0 left-0 right-0 z-50 bg-transparent transition-all duration-300 ease-in-out">
+        <nav className="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8">
+          <div className="flex">
+            <Link 
+              href="#hero" 
+              className="text-xl font-bold text-black dark:text-white"
+            >
+              <div>
+                Michal<span className="text-blue-500">.</span>
+              </div>
+            </Link>
+          </div>
+          
+          {/* Desktop navigation */}
+          <div className="hidden md:flex md:gap-x-8">
+            {navLinks.map((link) => (
+              <div key={link.name}>
+                <Link
+                  href={link.href}
+                  className="text-sm font-semibold text-black dark:text-white hover:text-blue-500 dark:hover:text-blue-400 transition-colors"
+                >
+                  {link.name}
+                </Link>
+              </div>
+            ))}
+          </div>
+
+          {/* Mobile menu button */}
+          <div className="flex md:hidden">
+            <button
+              type="button"
+              className="inline-flex items-center justify-center rounded-md p-2 text-black dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800"
+            >
+              <span className="sr-only">Open main menu</span>
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
+            </button>
+          </div>
+        </nav>
+      </header>
+    );
+  }
+
+  // Client-side render with animations (after mounted)
   return (
     <motion.header
       initial={{ y: -100 }}

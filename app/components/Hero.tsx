@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
+import { getAssetPath } from '../utils/basePath';
 
 // Define fixed background elements to avoid hydration errors
 const backgroundElements = [
@@ -17,17 +18,26 @@ const backgroundElements = [
 export default function Hero() {
   const [isVisible, setIsVisible] = useState(false);
   const [randomOffsets, setRandomOffsets] = useState<Array<{x: number, y: number}>>([]);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
-    setIsVisible(true);
+    // Mark as hydrated
+    setIsHydrated(true);
     
-    // Only generate random animation values on the client
-    setRandomOffsets(
-      backgroundElements.map(() => ({
-        x: Math.random() * 50 - 25,
-        y: Math.random() * 50 - 25
-      }))
-    );
+    // Add a small delay to ensure DOM is fully rendered before animations start
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+      
+      // Only generate random animation values on the client
+      setRandomOffsets(
+        backgroundElements.map(() => ({
+          x: Math.random() * 50 - 25,
+          y: Math.random() * 50 - 25
+        }))
+      );
+    }, 100); // 100ms delay
+    
+    return () => clearTimeout(timer);
   }, []);
 
   const containerVariants = {
@@ -46,6 +56,58 @@ export default function Hero() {
     hidden: { y: 20, opacity: 0 },
     visible: { y: 0, opacity: 1, transition: { duration: 0.5 } }
   };
+
+  // Only render animations after hydration
+  if (!isHydrated) {
+    return (
+      <section id="hero" className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-black z-0" />
+        <div className="relative z-10 container mx-auto px-4 flex flex-col md:flex-row items-center justify-between gap-12">
+          {/* Static version of the content for SSR */}
+          <div className="md:w-1/2 text-center md:text-left">
+            <div>
+              <h1 className="text-3xl md:text-5xl font-bold text-gray-900 dark:text-white leading-tight">
+                Hi, I&apos;m <span className="text-blue-600 dark:text-blue-400">Michal Borek</span>
+              </h1>
+            </div>
+            <div>
+              <h2 className="mt-4 text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300">
+                Aspiring Machine Learning Engineer
+              </h2>
+            </div>
+            <p className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-lg">
+              I&apos;m a junior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
+            </p>
+            <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
+              <Link href="#projects">
+                <button className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors">
+                  See My Work
+                </button>
+              </Link>
+              <Link href="#contact">
+                <button className="px-6 py-3 border border-blue-600 dark:border-blue-500 text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-900/30 font-medium rounded-lg transition-colors">
+                  Contact Me
+                </button>
+              </Link>
+            </div>
+          </div>
+          <div className="md:w-1/2 flex justify-center">
+            <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
+              <Image
+                src={getAssetPath('/pixel_me.png')}
+                alt="Michal - ML Engineer"
+                fill
+                sizes="(max-width: 768px) 256px, 320px"
+                priority
+                className="object-cover"
+                style={{ objectPosition: 'center top' }}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center py-20 md:py-32 overflow-hidden">
@@ -136,7 +198,7 @@ export default function Hero() {
         >
           <div className="relative w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-white dark:border-gray-800 shadow-xl">
             <Image
-              src="/pixel_me.png"
+              src={getAssetPath('/pixel_me.png')}
               alt="Michal - ML Engineer"
               fill
               sizes="(max-width: 768px) 256px, 320px"
