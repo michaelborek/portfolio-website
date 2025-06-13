@@ -6,6 +6,7 @@ import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 import ClientOnly from './components/ClientOnly';
+import Resume from './components/Resume';
 
 export default function Home() {
   // Create simple fallbacks to render on server
@@ -17,7 +18,7 @@ export default function Home() {
             Michal<span className="text-blue-500">.</span>
           </div>
           <div className="hidden md:flex md:gap-x-8">
-            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((link) => (
+            {['Home', 'About', 'Skills', 'Projects', 'Resume', 'Contact'].map((link) => (
               <div key={link} className="text-sm font-semibold text-black dark:text-white">
                 {link}
               </div>
@@ -75,6 +76,10 @@ export default function Home() {
       
       <ClientOnly fallback={projectsFallback}>
         <Projects />
+      </ClientOnly>
+      
+      <ClientOnly>
+        <Resume />
       </ClientOnly>
       
       <ClientOnly>
