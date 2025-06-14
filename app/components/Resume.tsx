@@ -43,7 +43,7 @@ const Resume = () => {
                     <li>Designed and implemented an ordinal classification pipeline on 708 NIOSH chest X-rays, leveraging pre-trained ResNet-50 (TorchXRayVision) with a 64/16/20 split and rigorous data augmentation.</li>
                     <li>Benchmarked four loss regimes—Cross-Entropy, MSE regression, multi-task conditional, and novel Hierarchical Cross-Entropy—achieving 71.4% test accuracy and reduced misclassification in critical ordinal boundaries.</li>
                     <li>Orchestrated end-to-end training workflows (512×512 resizing, fine-tuning, ensemble averaging).</li>
-                    <li>Co-authored SPIE 2025 paper and presented findings at Michigan State's UURAF 2025, highlighting advancements in ordinal DL loss design.</li>
+                    <li>Co-authored SPIE 2025 paper and presented findings at Michigan State&apos;s UURAF 2025, highlighting advancements in ordinal DL loss design.</li>
                   </ul>
                 </div>
                 
