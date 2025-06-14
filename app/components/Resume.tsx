@@ -18,12 +18,12 @@ const Resume = () => {
               <div className="space-y-6">
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Your University
+                    Michigan State University
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300">Degree in Computer Science</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">2018 - 2022</p>
+                  <p className="text-gray-600 dark:text-gray-300">Computational Data Science with minor in Mathematics</p>
+                  <p className="text-gray-600 dark:text-gray-300">Honors College</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">GPA: 3.835</p>
                 </div>
-                {/* Add more education items as needed */}
               </div>
             </div>
 
@@ -35,16 +35,30 @@ const Resume = () => {
               <div className="space-y-6">
                 <div>
                   <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
-                    Software Engineer
+                    Research Assistant
                   </h4>
-                  <p className="text-gray-600 dark:text-gray-300">Company Name</p>
-                  <p className="text-sm text-gray-500 dark:text-gray-400">2022 - Present</p>
-                  <ul className="list-disc list-inside mt-2 text-gray-600 dark:text-gray-300">
-                    <li>Key achievement or responsibility</li>
-                    <li>Another key achievement</li>
+                  <p className="text-gray-600 dark:text-gray-300">Institute for Quantitative Health Science & Engineering at MSU</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Nov. 2023 – Present</p>
+                  <ul className="list-disc list-inside mt-2 text-gray-600 dark:text-gray-300 text-sm space-y-1">
+                    <li>Designed and implemented an ordinal classification pipeline on 708 NIOSH chest X-rays, leveraging pre-trained ResNet-50 (TorchXRayVision) with a 64/16/20 split and rigorous data augmentation.</li>
+                    <li>Benchmarked four loss regimes—Cross-Entropy, MSE regression, multi-task conditional, and novel Hierarchical Cross-Entropy—achieving 71.4% test accuracy and reduced misclassification in critical ordinal boundaries.</li>
+                    <li>Orchestrated end-to-end training workflows (512×512 resizing, fine-tuning, ensemble averaging).</li>
+                    <li>Co-authored SPIE 2025 paper and presented findings at Michigan State's UURAF 2025, highlighting advancements in ordinal DL loss design.</li>
                   </ul>
                 </div>
-                {/* Add more experience items as needed */}
+                
+                <div>
+                  <h4 className="text-lg font-semibold text-gray-900 dark:text-white">
+                    Software Engineer Intern
+                  </h4>
+                  <p className="text-gray-600 dark:text-gray-300">Institute for Cyber-Enabled Research at MSU</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400">Jun. 2023 – Present</p>
+                  <ul className="list-disc list-inside mt-2 text-gray-600 dark:text-gray-300 text-sm space-y-1">
+                    <li>Developed and delivered a Python curriculum on MSU HPCC, covering introduction to Python, NumPy-based tensor operations, and best practices for large project developments.</li>
+                    <li>Authored a Python module to automate loading and launching of LM Studio under SLURM, enabling one-command startup of large language model workflows.</li>
+                    <li>Engineered an AI-driven agent that statically analyzes SLURM sbatch scripts, identifies suboptimal resource allocations, and recommends tuned CPU/GPU/memory parameters to accelerate DL training.</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
