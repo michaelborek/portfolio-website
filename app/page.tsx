@@ -78,9 +78,7 @@ export default function Home() {
         <Projects />
       </ClientOnly>
       
-      <ClientOnly>
-        <Resume />
-      </ClientOnly>
+      <Resume />
       
       <ClientOnly>
         <Contact />
