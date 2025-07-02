@@ -9,7 +9,7 @@ import { getAssetPath } from '../utils/basePath';
 
 const projects = [
   {
-    title: "DarkVision test test tes",
+    title: "DarkVision",
     description: "Developed a Computer Vision model for classifying animals in dark images with 92% accuracy.",
     image: getAssetPath('/darkvision.png'),
     tags: ["Computer Vision", "PyTorch", "CNN", "ResNet-18", "Fine-Tuning"],
@@ -26,7 +26,7 @@ const projects = [
   },
   {
     title: "QSide-Notebook",
-    description: "Tool which allows you to visulize your data without needing to go through the hassel of setting it up yourself.",
+    description: "Tool which allows you to visualize your data without needing to go through the hassle of setting it up yourself.",
     image: getAssetPath('/QSide.png'),
     tags: ["JupyterLite", "Python", "SQL"],
     github: "https://github.com/michaelborek/QSide-Notebook",

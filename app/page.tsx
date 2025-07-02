@@ -18,7 +18,7 @@ export default function Home() {
             Michal<span className="text-blue-500">.</span>
           </div>
           <div className="hidden md:flex md:gap-x-8">
-            {['Home', 'About', 'Skills', 'Projects', 'Contact'].map((link) => (
+            {['Home', 'About', 'Skills', 'Projects', 'Research', 'Contact'].map((link) => (
               <div key={link} className="text-sm font-semibold text-black dark:text-white">
                 {link}
               </div>

@@ -20,7 +20,9 @@ export default function Contact() {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    // Map Formspree field names to our state
+    const fieldName = name === '_replyto' ? 'email' : name;
+    setFormData(prev => ({ ...prev, [fieldName]: value }));
   };
 
   const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -133,7 +135,7 @@ export default function Contact() {
               transition={{ duration: 0.5, delay: 0.2 }}
             >
               <form 
-                action={process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT || "https://formspree.io/f/your-fallback-endpoint"}
+                action="https://formspree.io/f/mjkyakwl"
                 method="POST"
                 className="bg-white dark:bg-gray-700 rounded-xl p-6 shadow-lg"
                 onSubmit={handleFormSubmit}
@@ -167,6 +169,11 @@ export default function Contact() {
                   </motion.div>
                 ) : (
                   <>
+                    {/* Hidden input for Formspree */}
+                    <input type="hidden" name="_subject" value="Portfolio Contact Form Submission" />
+                    <input type="hidden" name="_next" value="thanks" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    
                     <div className="mb-4">
                       <label htmlFor="name" className="block text-gray-700 dark:text-gray-300 mb-2">
                         Name
@@ -189,7 +196,7 @@ export default function Contact() {
                       <input
                         type="email"
                         id="email"
-                        name="email"
+                        name="_replyto"
                         value={formData.email}
                         onChange={handleChange}
                         required
