@@ -6,7 +6,35 @@ import Link from 'next/link';
 import { FaFilePdf, FaExternalLinkAlt, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
 import { getAssetPath } from '../utils/basePath';
 
-const researchItems = [
+interface ResearchItem {
+  title: string;
+  description: string;
+  category: string;
+  venue: string;
+  date: string;
+  tags: string[];
+  abstract: string;
+  pdfPath?: string;
+  externalLink?: string;
+  doi?: string;
+  authors?: string;
+  citation?: string;
+}
+
+const researchItems: ResearchItem[] = [
+  {
+    title: "Ordinal Classification Framework for Multiclass Grading of Pneumoconiosis",
+    description: "Published research paper in SPIE Medical Imaging 2025 presenting a novel ordinal classification approach for automated pneumoconiosis severity grading.",
+    category: "Research Publication",
+    venue: "SPIE Medical Imaging 2025: Computer-Aided Diagnosis",
+    date: "April 2025",
+    externalLink: "https://www.spiedigitallibrary.org/conference-proceedings-of-spie/13407/134072Q/Ordinal-classification-framework-for-multiclass-grading-of-pneumoconiosis/10.1117/12.3046353.short",
+    doi: "10.1117/12.3046353",
+    tags: ["Machine Learning", "Medical Imaging", "Ordinal Classification", "Computer Vision", "SPIE"],
+    abstract: "This paper presents an ordinal classification framework specifically designed for multiclass grading of pneumoconiosis severity. Our approach addresses the inherent ordinal nature of pneumoconiosis progression stages, providing more accurate and clinically relevant automated assessment compared to traditional classification methods.",
+    authors: "Liu, M., Loveless, I., Huang, Z., Borek, M., Rosenman, K., Alessio, A., Wang, L.",
+    citation: "Liu, M., Loveless, I., Huang, Z., Borek, M., Rosenman, K., Alessio, A., Wang, L., \"Ordinal classification framework for multiclass grading of pneumoconiosis,\" in SPIE Medical Imaging 2025: Computer-Aided Diagnosis, vol. 13407, 134072Q, Apr. 2025. doi:10.1117/12.3046353"
+  },
   {
     title: "UURAF Research Poster 2025",
     description: "Research poster presented at the University Undergraduate Research and Arts Forum (UURAF), showcasing AI-powered pneumoconiosis classification using chest radiographs.",
@@ -94,39 +122,65 @@ export default function Research() {
                         </div>
                       </div>
                       
-                      {/* PDF preview and download */}
+                      {/* PDF preview and download OR External publication link */}
                       <div className="lg:w-80">
                         <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center">
                           <div className="mb-4">
                             <FaFilePdf className="w-16 h-16 text-red-500 mx-auto mb-3" />
                             <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                              Research Poster
+                              {item.category === 'Research Publication' ? 'Published Paper' : 'Research Poster'}
                             </h4>
                             <p className="text-sm text-gray-600 dark:text-gray-300">
-                              View or download the full poster
+                              {item.category === 'Research Publication' ? 'Access the publication online' : 'View or download the full poster'}
                             </p>
+                            {item.doi && (
+                              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                                DOI: {item.doi}
+                              </p>
+                            )}
                           </div>
                           
                           <div className="space-y-3">
-                            <Link 
-                              href={item.pdfPath} 
-                              target="_blank" 
-                              rel="noopener noreferrer"
-                              className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                            >
-                              <FaExternalLinkAlt className="w-4 h-4" />
-                              <span>View Poster</span>
-                            </Link>
-                            
-                            <Link 
-                              href={item.pdfPath} 
-                              download
-                              className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                            >
-                              <FaFilePdf className="w-4 h-4" />
-                              <span>Download PDF</span>
-                            </Link>
+                            {item.externalLink ? (
+                              <Link 
+                                href={item.externalLink} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                              >
+                                <FaExternalLinkAlt className="w-4 h-4" />
+                                <span>View Publication</span>
+                              </Link>
+                            ) : item.pdfPath && (
+                              <>
+                                <Link 
+                                  href={item.pdfPath} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                >
+                                  <FaExternalLinkAlt className="w-4 h-4" />
+                                  <span>View Poster</span>
+                                </Link>
+                                
+                                <Link 
+                                  href={item.pdfPath} 
+                                  download
+                                  className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                >
+                                  <FaFilePdf className="w-4 h-4" />
+                                  <span>Download PDF</span>
+                                </Link>
+                              </>
+                            )}
                           </div>
+                          
+                          {item.authors && (
+                            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Authors:</p>
+                              <p className="text-xs text-gray-600 dark:text-gray-300">{item.authors}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
                     </div>
@@ -212,41 +266,67 @@ export default function Research() {
                       </div>
                     </div>
                     
-                    {/* PDF preview and download */}
-                    <div className="lg:w-80">
-                      <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center">
-                        <div className="mb-4">
-                          <FaFilePdf className="w-16 h-16 text-red-500 mx-auto mb-3" />
-                          <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                            Research Poster
-                          </h4>
-                          <p className="text-sm text-gray-600 dark:text-gray-300">
-                            View or download the full poster
-                          </p>
-                        </div>
-                        
-                        <div className="space-y-3">
-                          <Link 
-                            href={item.pdfPath} 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                          >
-                            <FaExternalLinkAlt className="w-4 h-4" />
-                            <span>View Poster</span>
-                          </Link>
+                                          {/* PDF preview and download OR External publication link */}
+                      <div className="lg:w-80">
+                        <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center">
+                          <div className="mb-4">
+                            <FaFilePdf className="w-16 h-16 text-red-500 mx-auto mb-3" />
+                            <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                              {item.category === 'Research Publication' ? 'Published Paper' : 'Research Poster'}
+                            </h4>
+                            <p className="text-sm text-gray-600 dark:text-gray-300">
+                              {item.category === 'Research Publication' ? 'Access the publication online' : 'View or download the full poster'}
+                            </p>
+                            {item.doi && (
+                              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                                DOI: {item.doi}
+                              </p>
+                            )}
+                          </div>
                           
-                          <Link 
-                            href={item.pdfPath} 
-                            download
-                            className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                          >
-                            <FaFilePdf className="w-4 h-4" />
-                            <span>Download PDF</span>
-                          </Link>
+                          <div className="space-y-3">
+                            {item.externalLink ? (
+                              <Link 
+                                href={item.externalLink} 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                              >
+                                <FaExternalLinkAlt className="w-4 h-4" />
+                                <span>View Publication</span>
+                              </Link>
+                            ) : item.pdfPath && (
+                              <>
+                                <Link 
+                                  href={item.pdfPath} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                >
+                                  <FaExternalLinkAlt className="w-4 h-4" />
+                                  <span>View Poster</span>
+                                </Link>
+                                
+                                <Link 
+                                  href={item.pdfPath} 
+                                  download
+                                  className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                >
+                                  <FaFilePdf className="w-4 h-4" />
+                                  <span>Download PDF</span>
+                                </Link>
+                              </>
+                            )}
+                          </div>
+                          
+                          {item.authors && (
+                            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Authors:</p>
+                              <p className="text-xs text-gray-600 dark:text-gray-300">{item.authors}</p>
+                            </div>
+                          )}
                         </div>
                       </div>
-                    </div>
                   </div>
                 </div>
               </motion.div>
