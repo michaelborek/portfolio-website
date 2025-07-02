@@ -2,6 +2,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
 import Skills from './components/Skills';
+import Resume from './components/Resume';
 import Projects from './components/Projects';
 import Research from './components/Research';
 import Contact from './components/Contact';
@@ -18,7 +19,7 @@ export default function Home() {
             Michal<span className="text-blue-500">.</span>
           </div>
           <div className="hidden md:flex md:gap-x-8">
-            {['Home', 'About', 'Skills', 'Projects', 'Research', 'Contact'].map((link) => (
+            {['Home', 'About', 'Skills', 'Resume', 'Projects', 'Research', 'Contact'].map((link) => (
               <div key={link} className="text-sm font-semibold text-black dark:text-white">
                 {link}
               </div>
@@ -72,6 +73,10 @@ export default function Home() {
       
       <ClientOnly>
         <Skills />
+      </ClientOnly>
+      
+      <ClientOnly>
+        <Resume />
       </ClientOnly>
       
       <ClientOnly fallback={projectsFallback}>

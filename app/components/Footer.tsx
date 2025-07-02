@@ -29,8 +29,14 @@ export default function Footer() {
               <Link href="#skills" className="text-gray-400 hover:text-white transition-colors">
                 Skills
               </Link>
+              <Link href="#resume" className="text-gray-400 hover:text-white transition-colors">
+                Resume
+              </Link>
               <Link href="#projects" className="text-gray-400 hover:text-white transition-colors">
                 Projects
+              </Link>
+              <Link href="#research" className="text-gray-400 hover:text-white transition-colors">
+                Research
               </Link>
               <Link href="#contact" className="text-gray-400 hover:text-white transition-colors">
                 Contact

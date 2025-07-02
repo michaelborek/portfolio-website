@@ -9,13 +9,13 @@ import { getAssetPath } from '../utils/basePath';
 const researchItems = [
   {
     title: "UURAF Research Poster 2025",
-    description: "Research poster presented at the University Undergraduate Research and Arts Forum (UURAF), showcasing innovative research findings and methodologies.",
+    description: "Research poster presented at the University Undergraduate Research and Arts Forum (UURAF), showcasing AI-powered pneumoconiosis classification using chest radiographs.",
     category: "Research Poster",
-    venue: "UURAF 2025",
+    venue: "UURAF 2025 - Michigan State University",
     date: "2025",
     pdfPath: getAssetPath('/UURAF_poster_2025.pdf'),
-    tags: ["Research", "UURAF", "Poster Presentation"],
-    abstract: "This poster presents research conducted as part of the University Undergraduate Research and Arts Forum, demonstrating key findings and their implications for the field.",
+    tags: ["Machine Learning", "Medical Imaging", "Computer Vision", "ResNet", "UURAF"],
+    abstract: "Pneumoconiosis is an occupational lung disease caused by inhaling mineral dust, and chest radiography remains the key screening tool. Although standardization efforts by the ILO and NIOSH—such as the B Reader Certification Program—have improved consistency, challenges like reader variability, limited certified readers, and potential conflicts of interest persist. This study leverages artificial intelligence to objectively classify pneumoconiosis severity on a 4-point scale (0–3) using posterior-anterior chest radiographs from the NIOSH repository. A ResNet framework employing various loss functions (cross-entropy, corn, coral, focal staging, hierarchical, and hierarchical cross-entropy) is explored to enhance diagnostic reliability.",
   }
 ];
 
