@@ -44,6 +44,16 @@ const researchItems: ResearchItem[] = [
     pdfPath: getAssetPath('/UURAF_poster_2025.pdf'),
     tags: ["Machine Learning", "Medical Imaging", "Computer Vision", "ResNet", "UURAF"],
     abstract: "Pneumoconiosis is an occupational lung disease caused by inhaling mineral dust, and chest radiography remains the key screening tool. Although standardization efforts by the ILO and NIOSH—such as the B Reader Certification Program—have improved consistency, challenges like reader variability, limited certified readers, and potential conflicts of interest persist. This study leverages artificial intelligence to objectively classify pneumoconiosis severity on a 4-point scale (0–3) using posterior-anterior chest radiographs from the NIOSH repository. A ResNet framework employing various loss functions (cross-entropy, corn, coral, focal staging, hierarchical, and hierarchical cross-entropy) is explored to enhance diagnostic reliability.",
+  },
+  {
+    title: "HPC Agentic-AI Framework for Batch Job Script Validation",
+    description: "Research poster presenting an innovative Agentic-AI framework designed to help HPC users validate batch submission scripts using large language models to reduce computational waste.",
+    category: "Research Poster",
+    venue: "iCER MidSURE 2025 - Michigan State University",
+    date: "January 2025",
+    pdfPath: getAssetPath('/icer_midsure_poster.pdf'),
+    tags: ["High Performance Computing", "Large Language Models", "Agentic AI", "CodeLlama", "Software Engineering", "iCER"],
+    abstract: "High-performance computing (HPC) users frequently make errors when writing batch job submission scripts, e.g. syntax errors, references to unavailable software installations and/or data files, inappropriate resource requests for the given cluster. These errors generally result in failed submissions or worse, jobs failing after having spent significant time in a queue or after having run for some time on the cluster, leading to wasted compute cycles with unnecessary energy consumption and needlessly prolonging the research cycle. This project aims to help HPC users increase efficiency and productivity by employing an HPC hosted large language model (LLM) as an Agentic-AI framework designed to examine batch submission scripts and advise users on potential errors in syntax, software/file refences, and resource allocation prior to submission. We first focus our efforts on the Michigan State University High-Performance Computing Center, using the 'codellama' family of LLMs.",
   }
 ];
 
