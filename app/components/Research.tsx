@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Link from 'next/link';
 import { FaFilePdf, FaExternalLinkAlt, FaCalendar, FaMapMarkerAlt } from 'react-icons/fa';
 import { getAssetPath } from '../utils/basePath';
 
@@ -14,7 +13,7 @@ interface ResearchItem {
   date: string;
   tags: string[];
   abstract: string;
-  pdfPath?: string;
+  pdfFile?: string;  // Just the filename, not the full path
   externalLink?: string;
   doi?: string;
   authors?: string;
@@ -41,7 +40,7 @@ const researchItems: ResearchItem[] = [
     category: "Research Poster",
     venue: "UURAF 2025 - Michigan State University",
     date: "2025",
-    pdfPath: getAssetPath('/UURAF_poster_2025.pdf'),
+    pdfFile: '/UURAF_poster_2025.pdf',
     tags: ["Machine Learning", "Medical Imaging", "Computer Vision", "ResNet", "UURAF"],
     abstract: "Pneumoconiosis is an occupational lung disease caused by inhaling mineral dust, and chest radiography remains the key screening tool. Although standardization efforts by the ILO and NIOSH—such as the B Reader Certification Program—have improved consistency, challenges like reader variability, limited certified readers, and potential conflicts of interest persist. This study leverages artificial intelligence to objectively classify pneumoconiosis severity on a 4-point scale (0–3) using posterior-anterior chest radiographs from the NIOSH repository. A ResNet framework employing various loss functions (cross-entropy, corn, coral, focal staging, hierarchical, and hierarchical cross-entropy) is explored to enhance diagnostic reliability.",
   },
@@ -51,7 +50,7 @@ const researchItems: ResearchItem[] = [
     category: "Research Poster",
     venue: "iCER MidSURE 2025 - Michigan State University",
     date: "January 2025",
-    pdfPath: getAssetPath('/icer_midsure_poster.pdf'),
+    pdfFile: '/icer_midsure_poster.pdf',
     tags: ["High Performance Computing", "Large Language Models", "Agentic AI", "CodeLlama", "Software Engineering", "iCER"],
     abstract: "High-performance computing (HPC) users frequently make errors when writing batch job submission scripts, e.g. syntax errors, references to unavailable software installations and/or data files, inappropriate resource requests for the given cluster. These errors generally result in failed submissions or worse, jobs failing after having spent significant time in a queue or after having run for some time on the cluster, leading to wasted compute cycles with unnecessary energy consumption and needlessly prolonging the research cycle. This project aims to help HPC users increase efficiency and productivity by employing an HPC hosted large language model (LLM) as an Agentic-AI framework designed to examine batch submission scripts and advise users on potential errors in syntax, software/file refences, and resource allocation prior to submission. We first focus our efforts on the Michigan State University High-Performance Computing Center, using the 'codellama' family of LLMs.",
   }
@@ -73,6 +72,12 @@ export default function Research() {
     return () => clearTimeout(timer);
   }, []);
 
+  // Helper function to get the PDF path at render time
+  const getPdfPath = (pdfFile?: string) => {
+    if (!pdfFile) return undefined;
+    return getAssetPath(pdfFile);
+  };
+
   // Provide a static version for initial SSR render
   if (!isHydrated) {
     return (
@@ -84,9 +89,158 @@ export default function Research() {
             </h2>
 
             <div className="grid grid-cols-1 gap-8">
-              {researchItems.map((item) => (
-                <div
+              {researchItems.map((item) => {
+                const pdfPath = getPdfPath(item.pdfFile);
+                return (
+                  <div
+                    key={item.title}
+                    className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden"
+                  >
+                    <div className="p-8">
+                      <div className="flex flex-col lg:flex-row gap-6">
+                        {/* Main content */}
+                        <div className="flex-1">
+                          <div className="flex items-center gap-2 mb-3">
+                            <span className="px-3 py-1 text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
+                              {item.category}
+                            </span>
+                            <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
+                              <FaCalendar className="w-3 h-3" />
+                              <span>{item.date}</span>
+                            </div>
+                          </div>
+                          
+                          <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
+                            {item.title}
+                          </h3>
+                          
+                          <div className="flex items-center gap-1 mb-4 text-sm text-gray-600 dark:text-gray-300">
+                            <FaMapMarkerAlt className="w-3 h-3" />
+                            <span>{item.venue}</span>
+                          </div>
+                          
+                          <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
+                            {item.description}
+                          </p>
+                          
+                          <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                            {item.abstract}
+                          </p>
+                          
+                          <div className="flex flex-wrap gap-2 mb-6">
+                            {item.tags.map(tag => (
+                              <span 
+                                key={tag} 
+                                className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full"
+                              >
+                                {tag}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                        
+                        {/* PDF preview and download OR External publication link */}
+                        <div className="lg:w-80">
+                          <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center">
+                            <div className="mb-4">
+                              <FaFilePdf className="w-16 h-16 text-red-500 mx-auto mb-3" />
+                              <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
+                                {item.category === 'Research Publication' ? 'Published Paper' : 'Research Poster'}
+                              </h4>
+                              <p className="text-sm text-gray-600 dark:text-gray-300">
+                                {item.category === 'Research Publication' ? 'Access the publication online' : 'View or download the full poster'}
+                              </p>
+                              {item.doi && (
+                                <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
+                                  DOI: {item.doi}
+                                </p>
+                              )}
+                            </div>
+                            
+                            <div className="space-y-3">
+                              {item.externalLink ? (
+                                <a 
+                                  href={item.externalLink} 
+                                  target="_blank" 
+                                  rel="noopener noreferrer"
+                                  className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                >
+                                  <FaExternalLinkAlt className="w-4 h-4" />
+                                  <span>View Publication</span>
+                                </a>
+                              ) : pdfPath && (
+                                <>
+                                  <a 
+                                    href={pdfPath} 
+                                    target="_blank" 
+                                    rel="noopener noreferrer"
+                                    className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                  >
+                                    <FaExternalLinkAlt className="w-4 h-4" />
+                                    <span>View Poster</span>
+                                  </a>
+                                  
+                                  <a 
+                                    href={pdfPath} 
+                                    download
+                                    className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
+                                  >
+                                    <FaFilePdf className="w-4 h-4" />
+                                    <span>Download PDF</span>
+                                  </a>
+                                </>
+                              )}
+                            </div>
+                            
+                            {item.authors && (
+                              <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
+                                <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Authors:</p>
+                                <p className="text-xs text-gray-600 dark:text-gray-300">{item.authors}</p>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+  
+  // Original animated version for client-side
+  return (
+    <section id="research" className="py-20 bg-gray-50 dark:bg-gray-800">
+      <div className="container mx-auto px-4">
+        <motion.div
+          ref={ref}
+          initial={{ opacity: 0 }}
+          animate={(isInView || forceDisplay) ? { opacity: 1 } : { opacity: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-6xl mx-auto"
+        >
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+            Research & <span className="text-blue-600 dark:text-blue-400">Publications</span>
+          </h2>
+
+          <div className="grid grid-cols-1 gap-8">
+            {researchItems.map((item, index) => {
+              const pdfPath = getPdfPath(item.pdfFile);
+              return (
+                <motion.div
                   key={item.title}
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={(isInView || forceDisplay) ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
+                  transition={{ 
+                    duration: 0.5, 
+                    delay: index * 0.1,
+                    ease: "easeOut" 
+                  }}
+                  whileHover={{ y: -5 }}
                   className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden"
                 >
                   <div className="p-8">
@@ -152,7 +306,7 @@ export default function Research() {
                           
                           <div className="space-y-3">
                             {item.externalLink ? (
-                              <Link 
+                              <a 
                                 href={item.externalLink} 
                                 target="_blank" 
                                 rel="noopener noreferrer"
@@ -160,27 +314,27 @@ export default function Research() {
                               >
                                 <FaExternalLinkAlt className="w-4 h-4" />
                                 <span>View Publication</span>
-                              </Link>
-                            ) : item.pdfPath && (
+                              </a>
+                            ) : pdfPath && (
                               <>
-                                <Link 
-                                  href={item.pdfPath} 
+                                <a 
+                                  href={pdfPath} 
                                   target="_blank" 
                                   rel="noopener noreferrer"
                                   className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
                                 >
                                   <FaExternalLinkAlt className="w-4 h-4" />
                                   <span>View Poster</span>
-                                </Link>
+                                </a>
                                 
-                                <Link 
-                                  href={item.pdfPath} 
+                                <a 
+                                  href={pdfPath} 
                                   download
                                   className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
                                 >
                                   <FaFilePdf className="w-4 h-4" />
                                   <span>Download PDF</span>
-                                </Link>
+                                </a>
                               </>
                             )}
                           </div>
@@ -195,155 +349,12 @@ export default function Research() {
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-    );
-  }
-  
-  // Original animated version for client-side
-  return (
-    <section id="research" className="py-20 bg-gray-50 dark:bg-gray-800">
-      <div className="container mx-auto px-4">
-        <motion.div
-          ref={ref}
-          initial={{ opacity: 0 }}
-          animate={(isInView || forceDisplay) ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-6xl mx-auto"
-        >
-          <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-            Research & <span className="text-blue-600 dark:text-blue-400">Publications</span>
-          </h2>
-
-          <div className="grid grid-cols-1 gap-8">
-            {researchItems.map((item, index) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 30 }}
-                animate={(isInView || forceDisplay) ? { opacity: 1, y: 0 } : { opacity: 0, y: 30 }}
-                transition={{ 
-                  duration: 0.5, 
-                  delay: index * 0.1,
-                  ease: "easeOut" 
-                }}
-                whileHover={{ y: -5 }}
-                className="bg-white dark:bg-gray-900 rounded-xl shadow-lg overflow-hidden"
-              >
-                <div className="p-8">
-                  <div className="flex flex-col lg:flex-row gap-6">
-                    {/* Main content */}
-                    <div className="flex-1">
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="px-3 py-1 text-sm font-medium bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 rounded-full">
-                          {item.category}
-                        </span>
-                        <div className="flex items-center gap-1 text-sm text-gray-500 dark:text-gray-400">
-                          <FaCalendar className="w-3 h-3" />
-                          <span>{item.date}</span>
-                        </div>
-                      </div>
-                      
-                      <h3 className="text-2xl font-bold mb-3 text-gray-900 dark:text-white">
-                        {item.title}
-                      </h3>
-                      
-                      <div className="flex items-center gap-1 mb-4 text-sm text-gray-600 dark:text-gray-300">
-                        <FaMapMarkerAlt className="w-3 h-3" />
-                        <span>{item.venue}</span>
-                      </div>
-                      
-                      <p className="text-gray-600 dark:text-gray-300 mb-4 leading-relaxed">
-                        {item.description}
-                      </p>
-                      
-                      <p className="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
-                        {item.abstract}
-                      </p>
-                      
-                      <div className="flex flex-wrap gap-2 mb-6">
-                        {item.tags.map(tag => (
-                          <span 
-                            key={tag} 
-                            className="px-3 py-1 text-sm font-medium bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-full"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    
-                                          {/* PDF preview and download OR External publication link */}
-                      <div className="lg:w-80">
-                        <div className="bg-gray-100 dark:bg-gray-700 rounded-lg p-6 text-center">
-                          <div className="mb-4">
-                            <FaFilePdf className="w-16 h-16 text-red-500 mx-auto mb-3" />
-                            <h4 className="font-semibold text-gray-900 dark:text-white mb-2">
-                              {item.category === 'Research Publication' ? 'Published Paper' : 'Research Poster'}
-                            </h4>
-                            <p className="text-sm text-gray-600 dark:text-gray-300">
-                              {item.category === 'Research Publication' ? 'Access the publication online' : 'View or download the full poster'}
-                            </p>
-                            {item.doi && (
-                              <p className="text-xs text-gray-500 dark:text-gray-400 mt-2">
-                                DOI: {item.doi}
-                              </p>
-                            )}
-                          </div>
-                          
-                          <div className="space-y-3">
-                            {item.externalLink ? (
-                              <Link 
-                                href={item.externalLink} 
-                                target="_blank" 
-                                rel="noopener noreferrer"
-                                className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                              >
-                                <FaExternalLinkAlt className="w-4 h-4" />
-                                <span>View Publication</span>
-                              </Link>
-                            ) : item.pdfPath && (
-                              <>
-                                <Link 
-                                  href={item.pdfPath} 
-                                  target="_blank" 
-                                  rel="noopener noreferrer"
-                                  className="w-full inline-flex items-center justify-center gap-2 bg-blue-600 hover:bg-blue-700 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                                >
-                                  <FaExternalLinkAlt className="w-4 h-4" />
-                                  <span>View Poster</span>
-                                </Link>
-                                
-                                <Link 
-                                  href={item.pdfPath} 
-                                  download
-                                  className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
-                                >
-                                  <FaFilePdf className="w-4 h-4" />
-                                  <span>Download PDF</span>
-                                </Link>
-                              </>
-                            )}
-                          </div>
-                          
-                          {item.authors && (
-                            <div className="mt-4 pt-4 border-t border-gray-200 dark:border-gray-600">
-                              <p className="text-xs text-gray-500 dark:text-gray-400 font-medium mb-1">Authors:</p>
-                              <p className="text-xs text-gray-600 dark:text-gray-300">{item.authors}</p>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
+                </motion.div>
+              );
+            })}
           </div>
         </motion.div>
       </div>
     </section>
   );
-} 
+}

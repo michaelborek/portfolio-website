@@ -2,7 +2,6 @@
 
 import { useRef, useState, useEffect } from 'react';
 import { motion, useInView } from 'framer-motion';
-import Link from 'next/link';
 import { FaFilePdf, FaExternalLinkAlt, FaDownload, FaUser, FaBriefcase } from 'react-icons/fa';
 import { getAssetPath } from '../utils/basePath';
 
@@ -79,7 +78,7 @@ export default function Resume() {
                     </div>
                     
                     <div className="space-y-3">
-                      <Link 
+                      <a 
                         href={resumePath} 
                         target="_blank" 
                         rel="noopener noreferrer"
@@ -87,16 +86,16 @@ export default function Resume() {
                       >
                         <FaExternalLinkAlt className="w-4 h-4" />
                         <span>View Resume</span>
-                      </Link>
+                      </a>
                       
-                      <Link 
+                      <a 
                         href={resumePath} 
                         download="Michal_Borek_Resume.pdf"
                         className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
                       >
                         <FaDownload className="w-4 h-4" />
                         <span>Download PDF</span>
-                      </Link>
+                      </a>
                     </div>
                   </div>
                 </div>
@@ -194,7 +193,7 @@ export default function Resume() {
                   </div>
                   
                   <div className="space-y-3">
-                    <Link 
+                    <a 
                       href={resumePath} 
                       target="_blank" 
                       rel="noopener noreferrer"
@@ -202,16 +201,16 @@ export default function Resume() {
                     >
                       <FaExternalLinkAlt className="w-4 h-4" />
                       <span>View Resume</span>
-                    </Link>
+                    </a>
                     
-                    <Link 
+                    <a 
                       href={resumePath} 
                       download="Michal_Borek_Resume.pdf"
                       className="w-full inline-flex items-center justify-center gap-2 bg-gray-600 hover:bg-gray-700 dark:bg-gray-600 dark:hover:bg-gray-500 text-white py-3 px-4 rounded-lg font-medium transition-colors"
                     >
                       <FaDownload className="w-4 h-4" />
                       <span>Download PDF</span>
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </motion.div>
