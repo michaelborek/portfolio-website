@@ -7,19 +7,15 @@ interface ClientOnlyProps {
   fallback?: ReactNode;
 }
 
-/**
- * ClientOnly component to prevent hydration errors
- * Ensures content is only rendered on the client side
- */
-export default function ClientOnly({ children, fallback = null }: ClientOnlyProps) {
-  const [isMounted, setIsMounted] = useState(false);
+export default function ClientOnly({ children, fallback }: ClientOnlyProps) {
+  const [hasMounted, setHasMounted] = useState(false);
 
   useEffect(() => {
-    setIsMounted(true);
+    setHasMounted(true);
   }, []);
 
-  if (!isMounted) {
-    return <>{fallback}</>;
+  if (!hasMounted) {
+    return fallback ? <>{fallback}</> : null;
   }
 
   return <>{children}</>;
