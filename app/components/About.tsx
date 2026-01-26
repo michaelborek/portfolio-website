@@ -25,7 +25,7 @@ export default function About() {
           
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              I&apos;m a passionate junior at Michigan State University majoring in Computational Data Science and Mathematics with a focus on Machine Learning and Artificial Intelligence. I work as a research assistant for Dr. Adam Alessio, where I am developing a model to classify X-ray images of lungs to detect Pneumoconiosis. Moreover, I am a Software Engineer Intern at the Institute for Cyber Enabled Research (iCER), where I am developing tools on High Performance Computing Clusters (HPCC) to help researchers with their work. My journey in the world of technology began with a curiosity about how computers learn and make decisions, which led me to dive deep into the fascinating field of AI.
+              I&apos;m a passionate senior at Michigan State University majoring in Computational Data Science and Mathematics with a focus on Machine Learning and Artificial Intelligence. I work as a research assistant for Dr. Adam Alessio, where I am developing a model to classify X-ray images of lungs to detect Pneumoconiosis. Moreover, I am a Software Engineer Intern at the Institute for Cyber Enabled Research (iCER), where I am developing tools on High Performance Computing Clusters (HPCC) to help researchers with their work. My journey in the world of technology began with a curiosity about how computers learn and make decisions, which led me to dive deep into the fascinating field of AI.
             </p>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
