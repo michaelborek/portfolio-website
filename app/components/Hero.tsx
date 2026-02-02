@@ -76,7 +76,7 @@ export default function Hero() {
               </h2>
             </div>
             <p className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-lg">
-              I&apos;m a junior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
+              I&apos;m a senior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link href="#projects">
@@ -162,7 +162,7 @@ export default function Hero() {
             variants={itemVariants}
             className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-lg"
           >
-            I&apos;m a junior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
+            I&apos;m a senior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
           </motion.p>
 
           <motion.div 
