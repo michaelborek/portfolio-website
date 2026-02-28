@@ -72,11 +72,11 @@ export default function Hero() {
             </div>
             <div>
               <h2 className="mt-4 text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300">
-                Aspiring Machine Learning Engineer
+                Machine Learning Engineer & AI Consultant
               </h2>
             </div>
             <p className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-lg">
-              I&apos;m a senior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
+              I build production ML systems — from RAG pipelines and LLM applications to computer vision models. Experienced in end-to-end development, research, and deploying AI solutions that solve real problems.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
               <Link href="#projects">
@@ -154,7 +154,7 @@ export default function Hero() {
 
           <motion.div variants={itemVariants}>
             <h2 className="mt-4 text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300">
-              Aspiring Machine Learning Engineer
+              Machine Learning Engineer & AI Consultant
             </h2>
           </motion.div>
 
@@ -162,7 +162,7 @@ export default function Hero() {
             variants={itemVariants}
             className="mt-6 text-gray-600 dark:text-gray-400 text-base md:text-lg max-w-lg"
           >
-            I&apos;m a senior in college passionate about machine learning, artificial intelligence, cybersecurity, and creating innovative solutions to complex problems.
+            I build production ML systems — from RAG pipelines and LLM applications to computer vision models. Experienced in end-to-end development, research, and deploying AI solutions that solve real problems.
           </motion.p>
 
           <motion.div 

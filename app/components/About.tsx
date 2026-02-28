@@ -25,39 +25,39 @@ export default function About() {
           
           <div className="bg-gray-50 dark:bg-gray-800 rounded-xl p-6 md:p-8 shadow-lg">
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              I&apos;m a passionate senior at Michigan State University majoring in Computational Data Science and Mathematics with a focus on Machine Learning and Artificial Intelligence. I work as a research assistant for Dr. Adam Alessio, where I am developing a model to classify X-ray images of lungs to detect Pneumoconiosis. Moreover, I am a Software Engineer Intern at the Institute for Cyber Enabled Research (iCER), where I am developing tools on High Performance Computing Clusters (HPCC) to help researchers with their work. My journey in the world of technology began with a curiosity about how computers learn and make decisions, which led me to dive deep into the fascinating field of AI.
+              I&apos;m a Machine Learning Engineer graduating from Michigan State University with a degree in Computational Data Science and a Mathematics minor. I specialize in building end-to-end AI systems — from data pipelines and model training to production deployment. My recent work includes a full RAG system for legal document research with citation verification, medical imaging classifiers published at SPIE, and Agentic-AI tooling for high-performance computing.
             </p>
             
             <p className="text-gray-700 dark:text-gray-300 mb-4">
-              Throughout my academic journey, I&apos;ve developed a strong foundation in:
+              Core competencies:
             </p>
             
             <ul className="list-disc list-inside text-gray-700 dark:text-gray-300 mb-4 space-y-2">
-              <li>Machine Learning algorithms and frameworks</li>
-              <li>Data analysis and visualization</li>
-              <li>Python programming and scientific computing</li>
-              <li>Deep learning and neural networks</li>
-              <li>Natural Language Processing</li>
-              <li>Computer Vision</li>
+              <li>LLM applications, RAG pipelines, and retrieval systems</li>
+              <li>Computer Vision and medical imaging (published researcher)</li>
+              <li>Full-stack ML: Python, FastAPI, Docker, PostgreSQL, vector databases</li>
+              <li>High-performance computing and distributed systems</li>
+              <li>Production deployment and system architecture</li>
             </ul>
             
             <p className="text-gray-700 dark:text-gray-300 mb-6">
-              Beyond academics, I&apos;m actively involved in research projects at <Link href="https://midilab.notion.site/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">Medical Imaging and Data Integration Lab (MIDI Lab)</Link> and ML competitions to apply my knowledge to real-world problems. I&apos;m particularly interested in the ethical implications of AI and how we can develop responsible systems that benefit humanity.
+              I&apos;ve contributed to published research at <Link href="https://midilab.notion.site/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">MIDI Lab</Link> (medical imaging) and built developer tools at MSU&apos;s <Link href="https://icer.msu.edu/" target="_blank" rel="noopener noreferrer" className="text-blue-600 dark:text-blue-400 font-medium hover:underline">Institute for Cyber-Enabled Research</Link>. I&apos;m focused on building reliable, well-architected AI systems that deliver measurable results.
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
                 <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">Education</h3>
                 <p className="text-gray-700 dark:text-gray-300">
-                  Bachelor&apos;s in Computational Data Science with Minor in Mathematics<br />
-                  <span className="text-gray-500 dark:text-gray-400">Expected Graduation: Spring 2026</span>
+                  B.S. Computational Data Science, Minor in Mathematics<br />
+                  Michigan State University<br />
+                  <span className="text-gray-500 dark:text-gray-400">Spring 2026</span>
                 </p>
               </div>
               
               <div className="bg-white dark:bg-gray-700 p-4 rounded-lg shadow">
-                <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">Interests</h3>
+                <h3 className="font-semibold text-lg text-gray-900 dark:text-white mb-2">Looking For</h3>
                 <p className="text-gray-700 dark:text-gray-300">
-                  When I&apos;m not coding or studying, I enjoy playing basketball, seeing friends, and exploring the latest technological advancements.
+                  MLE / AI Engineer roles, ML consulting engagements, and research collaborations in NLP, computer vision, or applied AI.
                 </p>
               </div>
             </div>

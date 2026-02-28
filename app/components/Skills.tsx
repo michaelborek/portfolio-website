@@ -2,37 +2,39 @@
 
 import { useRef } from 'react';
 import { motion, useInView } from 'framer-motion';
-import { FaPython, FaReact, FaAws, FaDatabase } from 'react-icons/fa';
-import { SiTensorflow, SiPytorch, SiJupyter, SiScipy, SiPandas, SiScikitlearn } from 'react-icons/si';
+import { FaPython, FaReact, FaAws, FaDatabase, FaDocker } from 'react-icons/fa';
+import { SiTensorflow, SiPytorch, SiPandas, SiScikitlearn, SiFastapi, SiNextdotjs } from 'react-icons/si';
 
 const skills = [
   {
     category: 'Programming Languages',
     items: [
-      { name: 'Python', icon: <FaPython className="w-6 h-6" />, level: 90 },
+      { name: 'Python', icon: <FaPython className="w-6 h-6" />, level: 95 },
       { name: 'SQL', icon: <FaDatabase className="w-6 h-6" />, level: 90 },
-      { name: 'R', icon: null, level: 80 },
+      { name: 'TypeScript', icon: null, level: 80 },
       { name: 'C++', icon: null, level: 75 },
     ]
   },
   {
-    category: 'ML & Data Science',
+    category: 'ML & AI',
     items: [
-      { name: 'PyTorch', icon: <SiPytorch className="w-6 h-6" />, level: 85 },
-      { name: 'TensorFlow', icon: <SiTensorflow className="w-6 h-6" />, level: 75 },
+      { name: 'PyTorch', icon: <SiPytorch className="w-6 h-6" />, level: 90 },
+      { name: 'RAG / LLMs', icon: null, level: 90 },
       { name: 'Scikit-Learn', icon: <SiScikitlearn className="w-6 h-6" />, level: 90 },
-      { name: 'Pandas', icon: <SiPandas className="w-6 h-6" />, level: 95 },
-      { name: 'NumPy', icon: <SiScipy className="w-6 h-6" />, level: 95 },
-      { name: 'Jupyter', icon: <SiJupyter className="w-6 h-6" />, level: 95 },
+      { name: 'TensorFlow', icon: <SiTensorflow className="w-6 h-6" />, level: 75 },
+      { name: 'Pandas / NumPy', icon: <SiPandas className="w-6 h-6" />, level: 95 },
+      { name: 'Vector DBs', icon: null, level: 85 },
     ]
   },
   {
-    category: 'Web & Cloud',
+    category: 'Infrastructure & Web',
     items: [
-      { name: 'React', icon: <FaReact className="w-6 h-6" />, level: 70 },
-      { name: 'AWS', icon: <FaAws className="w-6 h-6" />, level: 65 },
-      { name: 'Docker', icon: null, level: 70 },
-      { name: 'Flask/FastAPI', icon: null, level: 50 },
+      { name: 'FastAPI', icon: <SiFastapi className="w-6 h-6" />, level: 90 },
+      { name: 'Docker', icon: <FaDocker className="w-6 h-6" />, level: 85 },
+      { name: 'Next.js', icon: <SiNextdotjs className="w-6 h-6" />, level: 80 },
+      { name: 'PostgreSQL', icon: <FaDatabase className="w-6 h-6" />, level: 85 },
+      { name: 'AWS', icon: <FaAws className="w-6 h-6" />, level: 70 },
+      { name: 'React', icon: <FaReact className="w-6 h-6" />, level: 75 },
     ]
   }
 ];
