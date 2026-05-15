@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//private/tmp/design-pkg/michal-borek-portfolio-design-system/**)"
+    ]
+  }
+}
