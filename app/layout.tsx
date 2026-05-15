@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
-import { Geist, Geist_Mono, Press_Start_2P } from 'next/font/google';
+import { Geist, Geist_Mono, Instrument_Serif } from 'next/font/google';
 import './globals.css';
-import './nyc.css';
+import './terminal.css';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const pressStart2P = Press_Start_2P({
-  variable: '--font-press-start-2p',
+const instrumentSerif = Instrument_Serif({
+  variable: '--font-instrument-serif',
   weight: '400',
   subsets: ['latin'],
 });
@@ -31,8 +31,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth" data-theme="night" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} ${pressStart2P.variable} antialiased`}>
+    <html lang="en" className="scroll-smooth" data-theme="terminal" suppressHydrationWarning>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${instrumentSerif.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

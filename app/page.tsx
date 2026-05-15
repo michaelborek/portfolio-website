@@ -1,10 +1,10 @@
 import ClientOnly from './components/ClientOnly';
-import NycApp from './components/nyc/shell';
+import Terminal from './components/terminal/Terminal';
 
 export default function Home() {
   return (
     <ClientOnly>
-      <NycApp />
+      <Terminal />
     </ClientOnly>
   );
 }
