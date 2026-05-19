@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Image from 'next/image';
 import { getAssetPath } from '../../utils/basePath';
 import { FS, HOST, USER, type FsNode } from './data';
+import MatrixRain from './MatrixRain';
 
 type View = 'terminal' | 'doc';
 
@@ -224,14 +225,16 @@ export default function Terminal() {
       'line:|  os    :  y|michal-os v26.05 (msu-build)',
       'line:|  host  :  c|MacBook · M-series',
       'line:|  shell :  c|zsh 5.9',
-      'line:|  role  :  m|ML Engineer · AI Consultant',
+      'line:|  role  :  m|AI Engineer · ML & Quantitative Systems',
       'line:|  edu   :  m|B.S. Computational Data Science · MSU',
-      'line:|  minor :  m|Mathematics',
-      'line:|  grads :  o|Spring 2026',
+      'line:|  minor :  m|Mathematics · GPA 3.80',
+      'line:|  grads :  o|May 2026',
       'line:|  loc   :  c|East Lansing, MI · any US state',
       'line:|  email :  c|borekmi1@msu.edu',
-      'line:|  pubs  :  y|2 · SPIE · iCER MidSURE',
-      'line:|  cpu   :  c|10y python · 4y deep-learning · ∞ curiosity',
+      'line:|  phone :  c|(517) 980-3231',
+      'line:|  langs :  c|Polish (native) · English (fluent)',
+      'line:|  pubs  :  y|SPIE 2025 · Radiology: AI (review) · Mid-SURE',
+      'line:|  stack :  c|python · pytorch · fastapi · ollama · qdrant',
       'line:|  uptime:  g|open_to_work',
     ];
     lines.forEach((e) => pushHtml(renderLineEntryHtml(e)));
@@ -269,11 +272,17 @@ export default function Terminal() {
   const printBanner = useCallback(() => {
     const html = `
       <div class="banner-card">
-        <div class="av-big">M</div>
-        <div class="who-big">
-          <div class="nm">Michal Borek</div>
-          <div class="rl">● ML Engineer · AI Consultant · Researcher</div>
-          <div class="lk"><a href="https://github.com/michaelborek" target="_blank" rel="noreferrer">github.com/michaelborek</a> · <a href="mailto:borekmi1@msu.edu">borekmi1@msu.edu</a> · MSU Spring '26 · open to any US state</div>
+        <div class="bc-top">
+          <span class="bc-prompt">▸</span>
+          <span class="bc-name">MICHAL BOREK</span><span class="bc-cur">_</span>
+          <span class="bc-status">[●] open_to_work</span>
+        </div>
+        <div class="bc-role">ai engineer · machine learning &amp; quantitative systems</div>
+        <div class="bc-grid">
+          <span class="bc-k">grad</span><span class="bc-v">may 2026 · MSU · CDS + math minor · GPA 3.80</span>
+          <span class="bc-k">stack</span><span class="bc-v">python · pytorch · fastapi · ollama · qdrant · slurm</span>
+          <span class="bc-k">github</span><span class="bc-v"><a href="https://github.com/michaelborek" target="_blank" rel="noreferrer">github.com/michaelborek</a></span>
+          <span class="bc-k">email</span><span class="bc-v"><a href="mailto:borekmi1@msu.edu">borekmi1@msu.edu</a></span>
         </div>
       </div>
     `;
@@ -563,7 +572,7 @@ export default function Terminal() {
               const cName = c.replace(/\/$/, '');
               const cPath = path + '/' + cName;
               const isMD = cName.endsWith('.md');
-              const star = cName.includes('law-assistant');
+              const star = cName.includes('ai-auto-caller');
               return (
                 <div key={cPath} className="sb-item" onClick={() => onSidebarFile(cPath)}>
                   <span className={`ico ${isMD ? 'md' : 'f'}`}>{isMD ? '⌘' : '▸'}</span>
@@ -582,14 +591,17 @@ export default function Terminal() {
   return (
     <>
       <div className="wallpaper" />
+      <MatrixRain />
+      <div className="crt-overlay" aria-hidden />
 
       <header className="topbar">
         <div className="brand-mini">
-          <div className="mark">M</div>
-          <span>
-            <b>michal borek</b>
-            <span className="dim"> · portfolio</span>
-          </span>
+          <span className="bm-seg">[ <span className="bm-k">michal@msu</span> ]</span>
+          <span className="bm-sep">─</span>
+          <span className="bm-seg">[ <span className="bm-p">~/portfolio</span> ]</span>
+          <span className="bm-sep">─</span>
+          <span className="bm-seg">[ <span className="bm-b">⎇ open-to-work</span> ]</span>
+          <span className="bm-cur" />
         </div>
 
         <div className="toggle" role="tablist" aria-label="View switch" ref={toggleRef}>
@@ -641,10 +653,12 @@ export default function Terminal() {
           <div className="term-body">
             <aside className="sidebar">
               <div className="sb-portrait">
-                <div className="av">M</div>
-                <div className="who">
-                  <div className="nm">Michal Borek</div>
-                  <div className="rl">● open_to_work</div>
+                <pre className="sb-ascii" aria-hidden>{`█▀▄▀█ █▄▄
+█ ▀ █ █▄█`}</pre>
+                <div className="sb-who">
+                  <div className="sb-name">MICHAL BOREK</div>
+                  <div className="sb-tag">ai · ml · quant systems</div>
+                  <div className="sb-status"><span className="sb-blip" /> open_to_work</div>
                 </div>
               </div>
 
@@ -743,12 +757,13 @@ export default function Terminal() {
             <div>
               <h1>Michal Borek</h1>
               <div className="role">
-                Machine Learning Engineer ·{' '}
-                <span className="k">AI Consultant · Researcher</span>
+                AI Engineer ·{' '}
+                <span className="k">Machine Learning &amp; Quantitative Systems</span>
               </div>
             </div>
             <div className="doc-contact">
               <a href="mailto:borekmi1@msu.edu">borekmi1@msu.edu</a>
+              <span>(517) 980-3231</span>
               <a href="https://github.com/michaelborek" target="_blank" rel="noreferrer">
                 github.com/michaelborek
               </a>
@@ -763,6 +778,7 @@ export default function Terminal() {
                 resume.pdf
               </a>
               <span>East Lansing, MI · open to any US state</span>
+              <span>Polish (native) · English (fluent)</span>
               <span className="pill">
                 <span className="d" />
                 OPEN TO WORK · SUMMER 2026
@@ -774,11 +790,14 @@ export default function Terminal() {
             <main>
               <h2>Summary</h2>
               <p className="lead">
-                ML Engineer graduating from Michigan State University with a B.S. in
-                Computational Data Science and a Mathematics minor. I build end-to-end AI
-                systems — RAG pipelines, computer-vision models, full-stack applications
-                — and ship them. Two peer-reviewed publications. Looking for MLE / AI
-                Engineer roles starting Summer 2026.
+                AI Engineer with strong quantitative and software-engineering foundations,
+                focused on building reliable AI systems, machine-learning pipelines, and
+                automation tools for real-world workflows. Experienced in deep learning,
+                LLM applications, RAG systems, medical-imaging ML, HPC tooling, voice-AI
+                automation, and client-facing data science. Strong in Python, SQL, PyTorch,
+                backend development, model evaluation, validation, and translating
+                ambiguous technical problems into practical AI solutions with measurable
+                impact.
               </p>
 
               <h2>Experience</h2>
@@ -786,142 +805,236 @@ export default function Terminal() {
               <div className="item">
                 <div className="item-head">
                   <div>
-                    <div className="t">Undergraduate Research Assistant</div>
+                    <div className="t">
+                      Deep Learning Research Assistant — Medical Imaging ML
+                    </div>
                     <div className="org">
-                      iCER — Institute for Cyber-Enabled Research · Michigan State University
+                      Institute for Quantitative Health Science &amp; Engineering · Michigan State University
                     </div>
                   </div>
-                  <div className="date">2024 — 2025</div>
+                  <div className="date">Nov 2023 — Present</div>
                 </div>
                 <ul>
                   <li>
-                    Co-designed an agentic-AI framework that validates SLURM batch-job
-                    scripts before submission, catching misconfigurations, GPU mismatches,
-                    and bad partitions.
+                    Built a modular <b>PyTorch</b> pipeline for ordinal medical image
+                    classification, supporting reproducible data curation, training,
+                    evaluation, and automatic reporting.
                   </li>
                   <li>
-                    Built the evaluation harness and a dataset of broken job scripts for
-                    benchmarking.
+                    Led hyperparameter optimization and model selection using held-out
+                    metrics, calibration analysis, and structured performance tracking.
                   </li>
-                  <li>Presented the work at iCER MidSURE 2025.</li>
+                  <li>
+                    Scaled training with <b>PyTorch DDP</b> on CUDA/SLURM — reduced wall
+                    time from <b style={{ color: 'var(--ink)' }}>~8 h to ~3 h</b>.
+                  </li>
+                  <li>
+                    Improved preprocessing efficiency (image resizing + pipeline design)
+                    for large-scale chest-X-ray experiments.
+                  </li>
+                  <li>
+                    Supported clinical model review with <b>Captum</b>-based saliency
+                    analysis for interpretability.
+                  </li>
+                  <li>
+                    Contributed to research disseminated through{' '}
+                    <b>SPIE Medical Imaging 2025</b> and a{' '}
+                    <b>Radiology: Artificial Intelligence</b> manuscript currently under
+                    review.
+                  </li>
                 </ul>
                 <div className="stack">
-                  <b>Stack ·</b> Python · LLM tool-use · SLURM · pytest
+                  <b>Stack ·</b> PyTorch · PyTorch DDP · CUDA · SLURM · Captum · TorchXRayVision · scikit-learn · NumPy
                 </div>
               </div>
 
               <div className="item">
                 <div className="item-head">
                   <div>
-                    <div className="t">TA Tooling — AUTO-GRADER</div>
-                    <div className="org">Computational Data Science · MSU</div>
+                    <div className="t">AI Engineer Intern — HPC / ML Tooling</div>
+                    <div className="org">
+                      Institute for Cyber-Enabled Research · Michigan State University
+                    </div>
                   </div>
-                  <div className="date">2023 — present</div>
+                  <div className="date">Jun 2023 — May 2026</div>
                 </div>
                 <ul>
                   <li>
-                    Built an automated grading system that runs student submissions
-                    against unittest suites in isolated Linux environments — used weekly
-                    by a 100+ student class.
+                    Shipped an AI-assisted <b>SLURM job-script validator</b> combining
+                    custom #SBATCH checks, ShellCheck, and local-LLM review through
+                    Ollama to reduce submission errors and speed user triage.
                   </li>
                   <li>
-                    Designed structured diff output so students see exactly which test
-                    failed and why.
+                    Deployed a <b>Flask service and CLI</b> on Open OnDemand with a live
+                    script editor, real-time analysis, and a SLURM-focused chat assistant
+                    for the HPCC user community.
+                  </li>
+                  <li>
+                    Designed <b>policy-constrained LLM workflows</b> with approved checks,
+                    controlled outputs, and validation logic to improve reliability and
+                    reduce unsupported guidance.
+                  </li>
+                  <li>
+                    Authored an HPCC module for <b>LM Studio</b> — one-command LLM
+                    workflows under SLURM and local inference experiments on H200 GPUs.
+                  </li>
+                  <li>
+                    Presented the AI agent at <b>Mid-SURE 2025</b> through a live demo
+                    and Q&amp;A with faculty, students, and technical stakeholders.
+                  </li>
+                  <li>
+                    Designed and delivered a <b>Python training track</b> for HPC users
+                    covering programming fundamentals, OOP, NumPy, and project structure.
                   </li>
                 </ul>
                 <div className="stack">
-                  <b>Stack ·</b> Python · unittest · Linux · bash · subprocess
+                  <b>Stack ·</b> Python · Flask · Ollama · LM Studio · SLURM · ShellCheck · Open OnDemand · Singularity · H200
                 </div>
               </div>
 
-              <div className="item">
-                <div className="item-head">
-                  <div>
-                    <div className="t">Independent ML Consulting</div>
-                    <div className="org">Self-employed · remote</div>
-                  </div>
-                  <div className="date">2024 — present</div>
-                </div>
-                <ul>
-                  <li>
-                    Short engagements building RAG/LLM systems and computer-vision models.
-                    Comfortable with the whole loop: scoping, eval design, training,
-                    deployment, monitoring.
-                  </li>
-                </ul>
-              </div>
-
-              <h2>Selected Projects</h2>
+              <h2>Projects</h2>
 
               <div className="item">
                 <div className="item-head">
                   <div>
                     <div className="t">
-                      Law-Assistant — RAG Research Assistant
+                      AI Auto-Caller for Outbound Prospecting
                       <span className="flagship-tag">★ FLAGSHIP</span>
                     </div>
+                    <div className="org">Shipping desktop product · macOS</div>
+                  </div>
+                  <div className="date">Mar 2026 — Present</div>
+                </div>
+                <ul>
+                  <li>
+                    Built a local macOS desktop app using <b>Electron, React, FastAPI,
+                    and SQLite</b> to automate outbound sales calls with the OpenAI
+                    Realtime API and Twilio.
+                  </li>
+                  <li>
+                    Shipped the product as a one-click <b>.dmg</b> with bundled ngrok,
+                    allowing non-technical customers to run the system with zero
+                    infrastructure setup.
+                  </li>
+                  <li>
+                    Designed a <b>licensing and anti-piracy</b> system using a Cloudflare
+                    Worker kill-switch with HMAC-signed responses.
+                  </li>
+                  <li>
+                    Validated against a <b>Level-2 pentest</b> and closed all{' '}
+                    <b style={{ color: 'var(--ink)' }}>8 identified attack vectors</b>.
+                  </li>
+                  <li>
+                    Built a production-grade release pipeline with{' '}
+                    <b>137 passing Python tests</b>, automated release scripts, and a
+                    Nuitka-compiled engine binary of ~60 MB.
+                  </li>
+                </ul>
+                <div className="stack">
+                  <b>Stack ·</b> Electron · React · FastAPI · SQLite · OpenAI Realtime API · Twilio · Cloudflare Workers · ngrok · Nuitka
+                </div>
+              </div>
+
+              <div className="item">
+                <div className="item-head">
+                  <div>
+                    <div className="t">Legal Document Intelligence System</div>
                     <div className="org">
-                      Open-source · github.com/michaelborek/Law-Assistant
+                      End-to-end RAG · github.com/michaelborek/Law-Assistant
                     </div>
                   </div>
-                  <div className="date">v0.4.2 · 2025</div>
+                  <div className="date">Dec 2025 — Feb 2026</div>
                 </div>
                 <ul>
                   <li>
-                    Hybrid retrieval (PostgreSQL full-text + Qdrant vector) over legal
-                    corpora, served by a FastAPI backend with a Next.js front. Generation
-                    runs on a local Llama 3.1 via Ollama.
+                    Built an end-to-end RAG system for PDF, DOCX, and TXT legal documents
+                    with <b>citation-backed answers</b> using PostgreSQL Full-Text Search,
+                    Qdrant, and local Ollama inference.
                   </li>
                   <li>
-                    Every response passes through a citation-verification layer that
-                    rejects claims not supported by retrieved evidence — making
-                    hallucinations structurally impossible.
+                    Implemented <b>structured outputs, verification/refusal logic</b>,
+                    claim-to-source validation, excerpt generation, audit logging,
+                    retries, and safe concurrency.
                   </li>
-                  <li>12,442 chunks indexed in production.</li>
                 </ul>
                 <div className="stack">
-                  <b>Stack ·</b> Python · FastAPI · Next.js · PostgreSQL · Qdrant · Ollama
-                  · Llama 3.1
+                  <b>Stack ·</b> Python · FastAPI · Next.js · PostgreSQL FTS · Qdrant · Ollama · Llama 3.1
                 </div>
               </div>
 
               <div className="item">
                 <div className="item-head">
                   <div>
-                    <div className="t">DarkVision — Low-light CV</div>
-                    <div className="org">github.com/michaelborek/DarkVision</div>
+                    <div className="t">
+                      Delta Dental Capstone — Project Lead{' '}
+                      <span style={{ color: 'var(--ink-3)', fontWeight: 400 }}>
+                        (Client-Facing Data Science)
+                      </span>
+                    </div>
+                    <div className="org">Delta Dental Data Science Team · MSU capstone</div>
                   </div>
-                  <div className="date">2024</div>
+                  <div className="date">Jan 2026 — Apr 2026</div>
                 </div>
                 <ul>
                   <li>
-                    Fine-tuned ResNet-18 with custom data augmentation for darkness,
-                    motion blur and IR-camera artifacts. Reached{' '}
-                    <b style={{ color: 'var(--ink)' }}>92% accuracy</b> on the held-out
-                    evaluation set.
+                    Led a partner-sponsored data-science capstone with the Delta Dental
+                    Data Science Team — coordinated scope, milestones, working sessions,
+                    and stakeholder updates.
+                  </li>
+                  <li>
+                    Built a <b>canonical dataset</b> by consolidating source tables into
+                    a stable schema and data dictionary for downstream analytics.
+                  </li>
+                  <li>
+                    Prototyped <b>feature mapping into a 3D model</b> to improve
+                    interpretability, visualization, and feature semantics.
                   </li>
                 </ul>
                 <div className="stack">
-                  <b>Stack ·</b> PyTorch · ResNet-18 · OpenCV · numpy
+                  <b>Stack ·</b> Python · Pandas · SQL · 3D visualization · stakeholder management
+                </div>
+              </div>
+
+              <h2>Publications</h2>
+
+              <div className="item">
+                <div className="item-head">
+                  <div>
+                    <div className="t">
+                      Ordinal classification framework for multiclass grading of pneumoconiosis
+                    </div>
+                    <div className="org">
+                      Liu, M., Loveless, I., Huang, Z., <b>Borek, M.</b>, Rosenman, K., Alessio, A., Wang, L.
+                    </div>
+                  </div>
+                  <div className="date">SPIE 2025</div>
+                </div>
+                <div className="stack">
+                  <b>SPIE Medical Imaging 2025: Computer-Aided Diagnosis</b>, 13407:134072Q · April 2025 ·{' '}
+                  <a
+                    href="https://doi.org/10.1117/12.3046353"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    doi:10.1117/12.3046353
+                  </a>
                 </div>
               </div>
 
               <div className="item">
                 <div className="item-head">
                   <div>
-                    <div className="t">QSide-Notebook — Zero-install data viz</div>
-                    <div className="org">github.com/michaelborek/QSide-Notebook</div>
+                    <div className="t">
+                      Pneumoconiosis Multi-task Screening and Classification using Fine-Tuned Deep Learning Models
+                    </div>
+                    <div className="org">
+                      Wang, L., Liu, M., Huang, Z., Loveless, I., <b>Borek, M.</b>, Rosenman, K., Alessio, A.
+                    </div>
                   </div>
-                  <div className="date">2024</div>
+                  <div className="date">2025</div>
                 </div>
-                <ul>
-                  <li>
-                    Fully client-side JupyterLite environment with SQL and Python kernels
-                    for exploring and charting datasets without local setup.
-                  </li>
-                </ul>
                 <div className="stack">
-                  <b>Stack ·</b> JupyterLite · Python · SQL
+                  <b>Radiology: Artificial Intelligence</b> · under review
                 </div>
               </div>
             </main>
@@ -930,76 +1043,81 @@ export default function Terminal() {
               <h2>Education</h2>
               <div className="edu-block">
                 <div className="t">B.S. Computational Data Science</div>
-                <div className="org">Mathematics minor</div>
+                <div className="org">Minor in Mathematics</div>
                 <div className="org" style={{ color: 'var(--ink-2)', marginTop: 2 }}>
-                  Michigan State University
+                  Michigan State University · College of Engineering
                 </div>
-                <div className="date">Aug 2022 — May 2026</div>
+                <div className="date">Aug 2022 — Expected May 2026</div>
+                <div className="detail">GPA: <b style={{ color: 'var(--ink)' }}>3.80</b></div>
                 <div className="detail">
                   Coursework: Deep Learning · Linear Algebra · Numerical Methods ·
                   Distributed Systems · Probability · Real Analysis.
                 </div>
               </div>
 
-              <h2>Publications</h2>
-              <div className="pub">
-                <div className="t">
-                  Medical-Imaging Classification with Convolutional Neural Networks
-                </div>
-                <div className="v">SPIE Medical Imaging · peer-reviewed · co-author</div>
+              <h2>Technical Skills</h2>
+              <div className="group">
+                <div className="skills-h">Languages</div>
+                <div className="detail">Python · C++ · SQL · Bash</div>
               </div>
-              <div className="pub">
-                <div className="t">
-                  HPC Agentic-AI Framework for Batch Job Script Validation
+              <div className="group">
+                <div className="skills-h">AI / ML</div>
+                <div className="detail">
+                  PyTorch · scikit-learn · TorchXRayVision · Captum · classification ·
+                  model evaluation · hyperparameter tuning · calibration
                 </div>
-                <div className="v">iCER MidSURE 2025 · MSU · January 2025</div>
+              </div>
+              <div className="group">
+                <div className="skills-h">Quantitative / Data</div>
+                <div className="detail">
+                  Pandas · NumPy · statistical analysis · feature engineering · F1-score ·
+                  confusion matrices
+                </div>
+              </div>
+              <div className="group">
+                <div className="skills-h">LLM / RAG</div>
+                <div className="detail">
+                  OpenAI Realtime API · Ollama · Qdrant · PostgreSQL FTS · citation-backed
+                  RAG · structured outputs · verification/refusal patterns
+                </div>
+              </div>
+              <div className="group">
+                <div className="skills-h">Backend / Systems</div>
+                <div className="detail">
+                  FastAPI · Flask · Docker · Git · Linux · REST APIs · SQLite
+                </div>
+              </div>
+              <div className="group">
+                <div className="skills-h">Product / Automation</div>
+                <div className="detail">
+                  Twilio · Electron · React · Cloudflare Workers · ngrok · Nuitka ·
+                  ShellCheck · Jupyter
+                </div>
+              </div>
+              <div className="group">
+                <div className="skills-h">HPC / Distributed</div>
+                <div className="detail">
+                  SLURM · CUDA · PyTorch DDP · Singularity · MSU HPCC
+                </div>
               </div>
 
-              <h2>Skills</h2>
-              <div className="group">
-                <div className="skills-h">ML / AI</div>
-                {[
-                  ['Python', 5],
-                  ['PyTorch', 4],
-                  ['RAG / LLMs', 4],
-                  ['Pandas / NumPy', 5],
-                  ['Computer Vision', 4],
-                ].map(([name, on]) => (
-                  <div className="bar-row" key={name as string}>
-                    <span className="name">{name}</span>
-                    <span className="vis">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <span
-                          key={i}
-                          className={`seg${i < (on as number) ? ' on' : ''}`}
-                        />
-                      ))}
-                    </span>
-                  </div>
-                ))}
+              <h2>Leadership &amp; Awards</h2>
+              <div className="pub">
+                <div className="t">Resident Assistant — MSU Housing &amp; Residence Education</div>
+                <div className="v">
+                  Aug 2024 — May 2026 · 100+ residents · REHS Excellent Teamwork Award (2025)
+                </div>
               </div>
-
-              <div className="group">
-                <div className="skills-h">Engineering</div>
-                {[
-                  ['FastAPI', 4],
-                  ['PostgreSQL', 4],
-                  ['Next.js · React', 4],
-                  ['Qdrant · vector DB', 4],
-                  ['Linux / HPC', 4],
-                ].map(([name, on]) => (
-                  <div className="bar-row" key={name as string}>
-                    <span className="name">{name}</span>
-                    <span className="vis">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <span
-                          key={i}
-                          className={`seg${i < (on as number) ? ' on' : ''}`}
-                        />
-                      ))}
-                    </span>
-                  </div>
-                ))}
+              <div className="pub">
+                <div className="t">Co-Founder · Polish Club, Michigan State University</div>
+                <div className="v">Oct 2024 — May 2026 · Executive Board Member</div>
+              </div>
+              <div className="pub">
+                <div className="t">Awards</div>
+                <div className="v">
+                  Dean&apos;s List (7 / 8 terms) · EGRID Silver Scholarship (2024) ·
+                  International Tuition Grant (2022)
+                </div>
               </div>
             </aside>
           </div>
