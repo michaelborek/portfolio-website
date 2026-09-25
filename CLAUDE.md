@@ -14,11 +14,13 @@ There is no test runner configured.
 
 ## Architecture
 
-Single-page Next.js 15 portfolio (App Router, React 19, Tailwind v4, framer-motion). All UI lives in `app/`:
+Single-page Next.js 15 portfolio (App Router, React 19), styled as a plain academic/research-engineer homepage: one ~860px column, system Helvetica, one link-blue accent, no web fonts, no animation, no Tailwind. All UI lives in `app/`:
 
-- `app/page.tsx` composes the page by stacking section components (`Hero`, `About`, `Skills`, `Resume`, `Projects`, `Research`, `Contact`, `Footer`) in order. To add or reorder a section, edit this file and add a component under `app/components/`.
-- `app/layout.tsx` sets the Geist font variables consumed by Tailwind's `font-[family-name:var(--font-geist-sans)]`.
-- Every section component is a `'use client'` module — framer-motion animations and scroll/`useInView` hooks need the client runtime. Only the `Navbar` is additionally wrapped in `<ClientOnly>` in `page.tsx` to defer mount until after hydration (it relies on `window` for scroll state).
+- `app/page.tsx` is a server component that renders every section (bio, News, Publications, Posters, Selected work, Experience, Education, Skills, Older projects). No client JS is needed.
+- `app/content.tsx` holds all content as typed arrays (`news`, `publications`, `posters`, `work`, `experience`, `skills`, `older`). To update the site, edit this file; the bio paragraphs live directly in `page.tsx`.
+- `app/globals.css` is the only stylesheet (plain CSS, mobile breakpoint at 640px).
+- Thumbnails live in `public/images/` at 480x320 (3:2). The `.jpg` files are crops of the real posters in `public/*.pdf`; the `.svg` files are hand-written schematics. Only show real numbers in them.
+- Tone: plain first-person copy that names concrete artifacts. Avoid marketing phrasing, metric cards, and chip clouds.
 
 ### Static export + basePath (critical)
 
@@ -28,11 +30,8 @@ Single-page Next.js 15 portfolio (App Router, React 19, Tailwind v4, framer-moti
 - `next/image` is used but image optimization is disabled by the export — treat `<Image>` essentially as a styled `<img>`.
 - No server features (API routes, server actions, ISR, middleware) — anything added must work as a fully static build.
 
-### Project data lives in the components
-
-Projects, research entries, skills, and resume content are hardcoded as typed arrays at the top of their respective components (e.g. `projects: Project[]` in `Projects.tsx`). There is no CMS or external data layer; to update content, edit the array literal in the relevant component.
-
 ### Stale folders
 
-- `portfolio/app/components/` and `portfolio/public/images/` (nested under the repo root) are empty leftovers — ignore them; real code is at the top level.
+- `portfolio/` (nested under the repo root) is an empty leftover — ignore it; real code is at the top level.
+- Earlier designs (framer-motion sections, pixel-art NYC, terminal) were removed; they remain in git history (`pixel-version` branch, `main` before the redesign).
 - `out/` is the build output and is also committed because it's what gets pushed to `gh-pages` via `npm run deploy`. The GitHub Actions workflow rebuilds it, so don't hand-edit files there.

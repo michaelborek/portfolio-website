@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 320" width="480" height="320" font-family="Helvetica Neue, Helvetica, Arial, sans-serif">
+  <rect width="480" height="320" fill="#fafafa"/>
+
+  <rect x="28" y="30" width="424" height="44" rx="4" fill="#fff" stroke="#9a9a9a"/>
+  <text x="44" y="57" font-size="14" fill="#333">What is the notice period for termination?</text>
+
+  <line x1="240" y1="74" x2="240" y2="96" stroke="#555" stroke-width="1.5"/>
+  <path d="M235 96 L240 104 L245 96 Z" fill="#555"/>
+
+  <rect x="28" y="110" width="424" height="88" rx="4" fill="#fff" stroke="#9a9a9a"/>
+  <text x="44" y="134" font-size="14" fill="#333">Answer</text>
+  <text x="44" y="158" font-size="14" fill="#333">Either party may terminate with 30 days'</text>
+  <text x="44" y="178" font-size="14" fill="#333">written notice.</text>
+  <text x="143" y="178" font-size="12" fill="#1a4f8b">[1]</text>
+
+  <rect x="28" y="214" width="424" height="76" rx="4" fill="#f1f5fa" stroke="#1a4f8b" stroke-width="1"/>
+  <text x="44" y="238" font-size="12" fill="#1a4f8b">[1] services-agreement.pdf, §12.2, p. 9</text>
+  <text x="44" y="262" font-size="13" fill="#555" font-style="italic">"...either Party may terminate this Agreement</text>
+  <text x="44" y="279" font-size="13" fill="#555" font-style="italic">upon thirty (30) days' prior written notice..."</text>
+</svg>
