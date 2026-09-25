@@ -91,8 +91,8 @@ export default function Home() {
         </p>
         <p>
           I finished my B.S. in Computational Data Science, with a minor in mathematics, at MSU in 2026.
-          Before that I spent three years at <a href="https://icer.msu.edu">iCER</a>, MSU&apos;s HPC
-          center, writing tools for people who run jobs on the cluster. On the side I&apos;m co-founding
+          Alongside my degree I spent three years at <a href="https://icer.msu.edu">iCER</a>, MSU&apos;s
+          HPC center, writing tools for people who run jobs on the cluster. On the side I&apos;m co-founding
           DockPilot, which makes scheduling software for warehouse loading docks.
         </p>
       </section>

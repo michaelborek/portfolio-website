@@ -68,7 +68,7 @@ export const publications: Entry[] = [
     description:
       'Deep learning models for screening and grading chest X-rays performed comparably to certified B readers on in-distribution test images. Out-of-distribution cases remain harder.',
     image: '/images/radiographs.jpg',
-    imageAlt: 'Two chest radiographs side by side: ILO profusion grade 0/0 and grade 3/3',
+    imageAlt: 'ILO standard chest radiograph showing profusion grade 3/3',
     links: [
       { label: 'paper', href: 'https://doi.org/10.1136/oemed-2026-111040' },
       { label: 'press', href: 'https://msutoday.msu.edu/news/2026/09/lung-screenings-for-toxic-dust' },
@@ -77,7 +77,7 @@ export const publications: Entry[] = [
   {
     title: 'Ordinal classification framework for multiclass grading of pneumoconiosis',
     authors: ['M. Liu', 'I. Loveless', 'Z. Huang', 'M. Borek', 'K. Rosenman', 'A. Alessio', 'L. Wang'],
-    venue: 'SPIE Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407',
+    venue: 'SPIE Medical Imaging 2025: Computer-Aided Diagnosis, Proc. SPIE 13407, 134072Q',
     description:
       'One of the first studies to apply deep learning to multiclass grading of occupational lung disease, treating the four ILO grades as an ordered scale.',
     image: '/images/confusion-matrix.jpg',

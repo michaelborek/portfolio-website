@@ -1,3 +1,13 @@
-# Michal's ML Engineer Portfolio
+# Michal Borek
 
-A modern, animated portfolio website for showcasing machine learning engineering skills and projects.
+Personal website: https://michaelborek.github.io/portfolio-website/
+
+Static Next.js site. Content lives in `app/content.tsx`, styles in `app/globals.css`.
+
+```bash
+npm install
+npm run dev     # http://localhost:3000
+npm run build   # static export to out/
+```
+
+Pushing to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`.
